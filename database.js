@@ -1,0 +1,59 @@
+const mysql = require("mysql2");
+
+const { returnInsertQuery, returnUpdateQuery } = require("./utils");
+
+const dotenv = require("dotenv").config();
+
+const pool = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_PORT
+}).promise();
+
+
+async function get(table) {
+    const [rows] = await pool.query(`SELECT * FROM ${table}`);
+    return rows;
+}
+
+async function getById(table, id, idName) {
+    const [rows] = await pool.query(`SELECT * FROM ${table} WHERE ${idName} = ${id}`);
+    return rows;
+}
+
+async function create(table, data) {
+    const sqlQuery = returnInsertQuery(table, data);
+
+    console.log("SQLQUERY= " + sqlQuery);
+
+    const [result] = await pool.query(sqlQuery, [data.cep, data.rua, data.bairro, data.cidade, data.estado, data.numero, data.tipoResidencia]);
+
+    console.log(result);
+
+    return getById(result.insertId);
+}
+
+async function updateById(table, data, id, idName) {
+    const sqlQuery = returnUpdateQuery(table, data, id, idName);
+
+    const [result] = await pool.query(sqlQuery);
+
+    console.log(result);
+
+    return getById(result);
+}
+
+async function deleteById(id, table, idName) {
+    const [result] = await pool.query(`DELETE FROM ${table} WHERE ${idName} = ${id}`);
+    return { "idDeleted": id, "result": result };
+}
+
+module.exports = {
+    get,
+    getById,
+    create,
+    updateById,
+    deleteById
+}
