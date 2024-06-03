@@ -3,11 +3,11 @@ function returnInsertQuery(table, data) {
 
     switch (table) {
         case "cadastro":
-            sqlQuery = sqlQuery + `(numeroCadastro, telefone, idEndereco) VALUES (${data.numeroCadastro}, ${data.telefone}, ${data.idEndereco})`;
+            sqlQuery = sqlQuery + `(numeroCadastro, telefone, idEndereco) VALUES (?, ?, ?)`;
             break;
 
         case "usuario":
-            sqlQuery = sqlQuery + `(nomeUsuario, senhaUsuario, idCadastro) VALUES (${data.nomeUsuario}, ${data.senhaUsuario}, ${data.idCadastro})`;
+            sqlQuery = sqlQuery + `(nomeUsuario, senhaUsuario, idCadastro) VALUES (?, ?, ?)`;
             break;
 
         case "endereco":
@@ -15,28 +15,27 @@ function returnInsertQuery(table, data) {
             break;
 
         case "aluno":
-            sqlQuery = sqlQuery + `(nomeAluno, nomeResponsavelLegal, nascimentoAluno, periodo, fotoAluno, idCadastro) VALUES (${data.nomeAluno}, ${data.nomeResponsavelLegal}, 
-                ${data.nascimentoAluno}, ${data.periodo}, ${data.fotoAluno}, ${idCadastro}`;
+            sqlQuery = sqlQuery + `(nomeAluno, nomeResponsavelLegal, nascimentoAluno, periodo, fotoAluno, idCadastro) VALUES (?, ?, ?, ?, ?, ?)`;
             break;
 
         case "cardapio":
-            sqlQuery = sqlQuery + `(cardapio, dataCardapio, idAgenda) VALUES (${data.cardapio}, ${data.dataCardapio}, ${data.idAgenda}`;
+            sqlQuery = sqlQuery + `(cardapio, dataCardapio, idAgenda) VALUES (?, ?, ?)`;
             break;
 
         case "turma":
-            sqlQuery = sqlQuery + `(nomeTurma, quantidadeAluno, idSala, idAgenda) VALUES (${data.nomeTurma}, ${data.quantidadeAluno}, ${data.idSala}, ${data.idAgenda}`;
+            sqlQuery = sqlQuery + `(nomeTurma, quantidadeAlunos, idSala, idAgenda) VALUES (?, ?, ?, ?)`;
             break;
 
         case "evento":
-            sqlQuery = sqlQuery + `(nomeEvento, dataEvento, idAgenda) VALUES (${data.nomeEvento}, ${data.dataEvento}, ${data.idAgenda}`;
+            sqlQuery = sqlQuery + `(nomeEvento, dataEvento, idAgenda) VALUES (?, ?, ?)`;
             break;
 
         case "sala":
-            sqlQuery = sqlQuery + `(nomeSala, idProfessor) VALUES (${data.nomeSala}, ${data.idProfessor}`;
+            sqlQuery = sqlQuery + `(nomeSala, idProfessor) VALUES (?, ?)`;
             break;
 
         case "professor":
-            sqlQuery = sqlQuery + `(nomeProfessor, dataNascimentoProfessor) VALUES (${data.nomeProfessor}, ${data.dataNascimentoProfessor}`;
+            sqlQuery = sqlQuery + `(nomeProfessor, dataNascimentoProfessor) VALUES (?, ?)`;
             break;
 
         case "agenda":
@@ -46,6 +45,56 @@ function returnInsertQuery(table, data) {
 
     return sqlQuery;
 }
+
+function returnInsertData(table, data) {
+    let sqlQuery = "";
+
+    switch (table) {
+        case "cadastro":
+            sqlQuery = [data.numeroCadastro, data.telefone, data.idEndereco];
+            break;
+
+        case "usuario":
+            sqlQuery = [data.nomeUsuario, data.senhaUsuario, data.idCadastro];
+            break;
+
+        case "endereco":
+            sqlQuery = [data.cep, data.rua, data.bairro, data.cidade, data.estado, data.numero, data.tipoResidencia];
+            break;
+
+        case "aluno":
+            sqlQuery = [data.nomeAluno, data.nomeResponsavelLegal, data.nascimentoAluno, data.periodo, data.fotoAluno, data.idCadastro];
+            break;
+
+        case "cardapio":
+            sqlQuery = [data.cardapio, data.dataCardapio, data.idAgenda];
+            break;
+
+        case "turma":
+            sqlQuery = [data.nomeTurma, data.quantidadeAlunos, data.idSala, data.idAgenda];
+            break;
+
+        case "evento":
+            sqlQuery = [data.nomeEvento, data.dataEvento, data.idAgenda];
+            break;
+
+        case "sala":
+            sqlQuery = [data.nomeSala, data.idProfessor];
+            break;
+
+        case "professor":
+            sqlQuery = [data.nomeProfessor, data.dataNascimentoProfessor];
+            break;
+
+        case "agenda":
+            sqlQuery = [];
+            break;
+    }
+
+    return sqlQuery;
+}
+
+
 
 function returnUpdateQuery(table, data, id, idName) {
     let sqlQuery = `UPDATE ${table} SET `
@@ -75,7 +124,7 @@ function returnUpdateQuery(table, data, id, idName) {
             break;
 
         case "turma":
-            sqlQuery = sqlQuery + `nomeTurma = ${data.nomeTurma}, quantidadeAluno = ${data.quantidadeAluno}, idSala = ${data.idSala}, idAgenda =  ${data.idAgenda} ${finalQuery}`;
+            sqlQuery = sqlQuery + `nomeTurma = ${data.nomeTurma}, quantidadeAlunos = ${data.quantidadeAlunos}, idSala = ${data.idSala}, idAgenda =  ${data.idAgenda} ${finalQuery}`;
             break;
 
         case "evento":
@@ -100,5 +149,6 @@ function returnUpdateQuery(table, data, id, idName) {
 
 module.exports = {
     returnInsertQuery,
+    returnInsertData,
     returnUpdateQuery
 }

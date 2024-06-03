@@ -12,8 +12,8 @@ async function getRegistrationById(id) {
 }
 
 async function createRegistration(data) {
-    console.log("Data= " + data);
-    return await database.create(tableName, data);
+    console.log("Data= " , data);
+    return await database.create(tableName, data, idName);
 }
 
 async function updateRegistration(data, id) {

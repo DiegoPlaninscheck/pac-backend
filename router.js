@@ -16,11 +16,11 @@ router.use("/student", studentController);
 router.use("/address", addressController);
 router.use("/calendar", calendarController);
 router.use("/class", classController);
-router.use("/class", eventController);
-router.use("/class", menuController);
-router.use("/class", registrationController);
-router.use("/class", roomController);
-router.use("/class", teacherController);
-router.use("/class", userController);
+router.use("/event", eventController);
+router.use("/menu", menuController);
+router.use("/registration", registrationController);
+router.use("/room", roomController);
+router.use("/teacher", teacherController);
+router.use("/user", userController);
 
 module.exports = router;

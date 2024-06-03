@@ -13,7 +13,7 @@ async function getEventById(id) {
 
 async function createEvent(data) {
     console.log("Data= " + data);
-    return await database.create(tableName, data);
+    return await database.create(tableName, data, idName);
 }
 
 async function updateEvent(data, id) {

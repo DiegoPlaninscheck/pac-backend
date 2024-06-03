@@ -13,7 +13,7 @@ async function getClassById(id) {
 
 async function createClass(data) {
     console.log("Data= " + data);
-    return await database.create(tableName, data);
+    return await database.create(tableName, data, idName);
 }
 
 async function updateClass(data, id) {

@@ -13,7 +13,7 @@ async function getStudentById(id) {
 
 async function createStudent(data) {
     console.log("Data= " + data);
-    return await database.create(tableName, data);
+    return await database.create(tableName, data, idName);
 }
 
 async function updateStudent(data, id) {

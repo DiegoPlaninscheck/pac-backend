@@ -13,7 +13,7 @@ async function getMenuById(id) {
 
 async function createMenu(data) {
     console.log("Data= " + data);
-    return await database.create(tableName, data);
+    return await database.create(tableName, data, idName);
 }
 
 async function updateMenu(data, id) {

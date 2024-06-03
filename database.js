@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 
-const { returnInsertQuery, returnUpdateQuery } = require("./utils");
+const { returnInsertQuery, returnInsertData, returnUpdateQuery } = require("./utils");
 
 const dotenv = require("dotenv").config();
 
@@ -23,16 +23,16 @@ async function getById(table, id, idName) {
     return rows;
 }
 
-async function create(table, data) {
+async function create(table, data, idName) {
     const sqlQuery = returnInsertQuery(table, data);
 
     console.log("SQLQUERY= " + sqlQuery);
 
-    const [result] = await pool.query(sqlQuery, [data.cep, data.rua, data.bairro, data.cidade, data.estado, data.numero, data.tipoResidencia]);
+    const [result] = await pool.query(sqlQuery, returnInsertData(table, data));
 
     console.log(result);
 
-    return getById(result.insertId);
+    return getById(table, result.insertId, idName);
 }
 
 async function updateById(table, data, id, idName) {
