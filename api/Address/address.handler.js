@@ -12,11 +12,12 @@ async function getAddressById(id) {
 }
 
 async function createAddress(data) {
-    console.log("Data= " , data);
     return await database.create(tableName, data, idName);
 }
 
 async function updateAddress(data, id) {
+    console.log("Data= " , data);
+
     return await database.updateById(tableName, data, id, idName);
 }
 

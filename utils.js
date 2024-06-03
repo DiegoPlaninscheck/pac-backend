@@ -1,4 +1,4 @@
-function returnInsertQuery(table, data) {
+function returnInsertQuery(table) {
     let sqlQuery = `INSERT INTO ${table} `
 
     switch (table) {
@@ -94,11 +94,9 @@ function returnInsertData(table, data) {
     return sqlQuery;
 }
 
-
-
 function returnUpdateQuery(table, data, id, idName) {
     let sqlQuery = `UPDATE ${table} SET `
-    let finalQuery = ` WHERE ${idName} = ${id}`
+    const finalQuery = ` WHERE ${idName} = ${id}`
 
     switch (table) {
         case "cadastro":
@@ -109,9 +107,9 @@ function returnUpdateQuery(table, data, id, idName) {
             sqlQuery = sqlQuery + `nomeUsuario = ${data.nomeUsuario}, senhaUsuario = ${data.senhaUsuario}, idCadastro = ${data.idCadastro} ${finalQuery}`;
             break;
 
+            // !!!!!!!!!!!! forma correta, esta dando certo !!!!!!!!!!!!
         case "endereco":
-            sqlQuery = sqlQuery + `cep = ${data.cep}, rua = ${data.rua}, bairro = ${data.bairro}, cidade = ${data.cidade}, 
-            estado = ${data.estado}, numero = ${data.numero}, tipoResidencia = ${data.tipoResidencia} ${finalQuery}`;
+            sqlQuery = sqlQuery + `cep = ${data.cep}, rua = "${data.rua}", bairro = "${data.bairro}", cidade = "${data.cidade}", estado = "${data.estado}", numero = "${data.numero}", tipoResidencia = "${data.tipoResidencia}" ${finalQuery}`;
             break;
 
         case "aluno":

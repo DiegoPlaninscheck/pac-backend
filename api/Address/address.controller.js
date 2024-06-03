@@ -12,11 +12,12 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    console.log("Body= " , req.body);
     res.json(await createAddress(req.body));
 });
 
 router.put("/:id", async (req, res) => {
+    console.log("Body= " , req.body);
+
     res.json(await updateAddress(req.body, req.params.id));
 });
 

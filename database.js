@@ -24,13 +24,9 @@ async function getById(table, id, idName) {
 }
 
 async function create(table, data, idName) {
-    const sqlQuery = returnInsertQuery(table, data);
-
-    console.log("SQLQUERY= " + sqlQuery);
+    const sqlQuery = returnInsertQuery(table);
 
     const [result] = await pool.query(sqlQuery, returnInsertData(table, data));
-
-    console.log(result);
 
     return getById(table, result.insertId, idName);
 }
@@ -42,7 +38,7 @@ async function updateById(table, data, id, idName) {
 
     console.log(result);
 
-    return getById(result);
+    return getById(table, id, idName);
 }
 
 async function deleteById(id, table, idName) {
