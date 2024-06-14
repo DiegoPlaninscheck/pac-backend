@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getRegistration, getRegistrationById, createRegistration, updateRegistration, deleteRegistration } = require("./registration.handler");
+const { getRegistration, getRegistrationById, createRegistration, exportToExcel, updateRegistration, deleteRegistration } = require("./registration.handler");
 
 router.get("/", async (req, res) => {
     res.json(await getRegistration());
@@ -12,8 +12,17 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    console.log("Body= " , req.body);
+    console.log("Body= ", req.body);
     res.json(await createRegistration(req.body));
+});
+
+router.post("/exportToExcel", async (req, res) => {
+    const worksheet = await exportToExcel(req.body);
+
+    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    res.setHeader("Content-Disposition", "attachment; filename=" + "cadastros.xlsx");
+
+    worksheet.xlsx.write(res);
 });
 
 router.put("/:id", async (req, res) => {
