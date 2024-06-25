@@ -2,6 +2,10 @@ function returnInsertQuery(table) {
     let sqlQuery = `INSERT INTO ${table} `
 
     switch (table) {
+        case "matricula":
+            sqlQuery = sqlQuery + `(nomeCompleto, dataNascimento, nomeResponsavelLegal, emailResponsavelLegal, fotoAluno, rendaFamiliar, periodoEscolar, idEndereco) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+            break
+
         case "cadastro":
             sqlQuery = sqlQuery + `(numeroCadastro, telefone, idEndereco) VALUES (?, ?, ?)`;
             break;
@@ -11,7 +15,8 @@ function returnInsertQuery(table) {
             break;
 
         case "endereco":
-            sqlQuery = sqlQuery + `(cep, rua, bairro, cidade, estado, numero, tipoResidencia) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+            // sqlQuery = sqlQuery + `(cep, rua, bairro, cidade, estado, numero, tipoResidencia) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+            sqlQuery = sqlQuery + `(cep, rua, bairro, cidade) VALUES (?, ?, ?, ?)`;
             break;
 
         case "aluno":
@@ -50,6 +55,10 @@ function returnInsertData(table, data) {
     let sqlQuery = "";
 
     switch (table) {
+        case "matricula":
+            sqlQuery = [data.nomeCompleto, data.dataNascimento, data.nomeResponsavelLegal, data.emailResponsavelLegal, data.fotoAluno || "", data.rendaFamiliar, data.periodoEscolar, data.idEndereco]
+            break
+
         case "cadastro":
             sqlQuery = [data.numeroCadastro, data.telefone, data.idEndereco];
             break;
@@ -59,7 +68,8 @@ function returnInsertData(table, data) {
             break;
 
         case "endereco":
-            sqlQuery = [data.cep, data.rua, data.bairro, data.cidade, data.estado, data.numero, data.tipoResidencia];
+            // sqlQuery = [data.cep, data.rua, data.bairro, data.cidade, data.estado, data.numero, data.tipoResidencia];
+            sqlQuery = [data.cep, data.rua, data.bairro, data.cidade];
             break;
 
         case "aluno":
@@ -107,7 +117,7 @@ function returnUpdateQuery(table, data, id, idName) {
             sqlQuery = sqlQuery + `nomeUsuario = ${data.nomeUsuario}, senhaUsuario = ${data.senhaUsuario}, idCadastro = ${data.idCadastro} ${finalQuery}`;
             break;
 
-            // !!!!!!!!!!!! forma correta, esta dando certo !!!!!!!!!!!!
+        // !!!!!!!!!!!! forma correta, esta dando certo !!!!!!!!!!!!
         case "endereco":
             sqlQuery = sqlQuery + `cep = ${data.cep}, rua = "${data.rua}", bairro = "${data.bairro}", cidade = "${data.cidade}", estado = "${data.estado}", numero = "${data.numero}", tipoResidencia = "${data.tipoResidencia}" ${finalQuery}`;
             break;

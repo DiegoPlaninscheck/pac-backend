@@ -3,7 +3,7 @@ const cors = require("cors");
 const router = require("./router.js");
 const app = express();
 
-// var bodyParser = require('body-parser')
+// const { exportToExcel } = require("./api/Registration/registration.handler.js");
 
 const dotenv = require("dotenv").config();
 
@@ -15,6 +15,21 @@ app.use("/api", router);
 app.get("/", (req, res) => {
     res.send("Hello world");
 });
+
+// app.post("/exportToExcel", async (req, res) => {
+//     const worksheet = await exportToExcel(req.body);
+
+//     console.log(worksheet);
+
+//     res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+//     res.setHeader("Content-Disposition", "attachment; filename=" + "cadastros.xlsx");
+
+//     worksheet.xlsx.write(res);
+
+//     res.attachment("cadastro.xlsx");
+
+//     res.send(worksheet);
+// });
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

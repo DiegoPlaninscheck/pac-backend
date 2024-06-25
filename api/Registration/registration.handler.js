@@ -1,8 +1,10 @@
 const database = require("../../database");
 const excel = require("exceljs");
 
-const tableName = 'cadastro';
-const idName = "idCadastro";
+// const tableName = 'cadastro';
+// const idName = "idCadastro";
+const tableName = 'matricula';
+const idName = "idMatricula";
 
 async function getRegistration() {
     return await database.get(tableName);
@@ -19,9 +21,6 @@ async function createRegistration(data) {
 
 async function exportToExcel(data) {
     try {
-
-        data = data.cadastros;
-
         let workbook = new excel.Workbook();
 
         const sheet = workbook.addWorksheet("Cadastros");

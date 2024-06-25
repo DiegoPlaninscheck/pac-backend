@@ -19,10 +19,14 @@ router.post("/", async (req, res) => {
 router.post("/exportToExcel", async (req, res) => {
     const worksheet = await exportToExcel(req.body);
 
+    console.log(worksheet);
+
     res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     res.setHeader("Content-Disposition", "attachment; filename=" + "cadastros.xlsx");
 
     worksheet.xlsx.write(res);
+
+    res.sendFile(worksheet);
 });
 
 router.put("/:id", async (req, res) => {
