@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getRegistration, getRegistrationById, createRegistration, exportToExcel, updateRegistration, deleteRegistration } = require("./registration.handler");
+const { getRegistration, getRegistrationById, createRegistration, exportToExcel, updateRegistration, deleteRegistration, getRegistrationAddress } = require("./registration.handler");
 
 router.get("/", async (req, res) => {
     res.json(await getRegistration());
@@ -9,6 +9,11 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     res.json(await getRegistrationById(req.params.id));
+});
+
+router.get("/getRegistrationAddress", async (req, res) => {
+    console.log("getRegistrationAddress");
+    res.json(await getRegistrationAddress());
 });
 
 router.post("/", async (req, res) => {

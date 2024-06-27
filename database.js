@@ -23,6 +23,15 @@ async function getById(table, id, idName) {
     return rows;
 }
 
+async function getRegistrationAddress(firstTable, secondTable) {
+    console.log("First Table= ", firstTable);
+    console.log("Second Table= ", secondTable);
+    // const [rows] = await pool.query(`SELECT * FROM ${firstTable} JOIN ${secondTable} ON ${firstTable}.idEndereco = ${secondTable}.idEndereco`);
+    // return rows;
+    return "";
+
+}
+
 async function create(table, data, idName) {
     const sqlQuery = returnInsertQuery(table);
 
@@ -49,6 +58,7 @@ async function deleteById(id, table, idName) {
 module.exports = {
     get,
     getById,
+    getRegistrationAddress,
     create,
     updateById,
     deleteById

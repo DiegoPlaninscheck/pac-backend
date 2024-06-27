@@ -5,6 +5,7 @@ const excel = require("exceljs");
 // const idName = "idCadastro";
 const tableName = 'matricula';
 const idName = "idMatricula";
+const secondTable = "endereco";
 
 async function getRegistration() {
     return await database.get(tableName);
@@ -12,6 +13,10 @@ async function getRegistration() {
 
 async function getRegistrationById(id) {
     return await database.getById(tableName, id, idName);
+}
+
+async function getRegistrationAddress() {
+    return await database.getRegistrationAddress(tableName, secondTable);
 }
 
 async function createRegistration(data) {
@@ -65,6 +70,7 @@ async function deleteRegistration(id) {
 module.exports = {
     getRegistration,
     getRegistrationById,
+    getRegistrationAddress,
     createRegistration,
     exportToExcel,
     updateRegistration,
