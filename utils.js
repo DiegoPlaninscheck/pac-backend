@@ -109,6 +109,10 @@ function returnUpdateQuery(table, data, id, idName) {
     const finalQuery = ` WHERE ${idName} = ${id}`
 
     switch (table) {
+        case "matricula":
+            sqlQuery = sqlQuery + `nomeCompleto = "${data.nomeCompleto}", dataNascimento = "${data.dataNascimento}", nomeResponsavelLegal = "${data.nomeResponsavelLegal}", emailResponsavelLegal = "${data.emailResponsavelLegal}", rendaFamiliar = ${data.rendaFamiliar}, periodoEscolar = "${data.periodoEscolar}", idEndereco = ${data.idEndereco} ${finalQuery}`
+            break;
+
         case "cadastro":
             sqlQuery = sqlQuery + `numeroCadastro = ${data.numeroCadastro}, telefone = ${data.telefone}, idEndereco = ${data.idEndereco} ${finalQuery}`;
             break;
@@ -119,7 +123,7 @@ function returnUpdateQuery(table, data, id, idName) {
 
         // !!!!!!!!!!!! forma correta, esta dando certo !!!!!!!!!!!!
         case "endereco":
-            sqlQuery = sqlQuery + `cep = ${data.cep}, rua = "${data.rua}", bairro = "${data.bairro}", cidade = "${data.cidade}", estado = "${data.estado}", numero = "${data.numero}", tipoResidencia = "${data.tipoResidencia}" ${finalQuery}`;
+            sqlQuery = sqlQuery + `cep = ${data.cep}, rua = "${data.rua}", bairro = "${data.bairro}", cidade = "${data.cidade}" ${finalQuery}`;
             break;
 
         case "aluno":

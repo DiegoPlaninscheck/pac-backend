@@ -16,8 +16,6 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-    console.log("Body= " , req.body);
-
     res.json(await updateAddress(req.body, req.params.id));
 });
 

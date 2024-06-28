@@ -20,44 +20,43 @@ async function getRegistrationAddress() {
 }
 
 async function createRegistration(data) {
-    console.log("Data= ", data);
     return await database.create(tableName, data, idName);
 }
 
-async function exportToExcel(data) {
-    try {
-        let workbook = new excel.Workbook();
+// async function exportToExcel(data) {
+//     try {
+//         let workbook = new excel.Workbook();
 
-        const sheet = workbook.addWorksheet("Cadastros");
+//         const sheet = workbook.addWorksheet("Cadastros");
 
-        sheet.columns = [
-            { header: "Id", key: "id", width: 30 },
-            { header: "Numero cadastro", key: "numero_cadastro", width: 30 },
-            { header: "Aluno", key: "aluno", width: 30 },
-            { header: "Data nascimento", key: "data_nascimento", width: 30 },
-            { header: "Responsavel", key: "responsavel", width: 30 },
-            { header: "Telefone", key: "telefone", width: 30 },
-            { header: "Email", key: "email", width: 30 },
-        ];
+//         sheet.columns = [
+//             { header: "Id", key: "id", width: 30 },
+//             { header: "Numero cadastro", key: "numero_cadastro", width: 30 },
+//             { header: "Aluno", key: "aluno", width: 30 },
+//             { header: "Data nascimento", key: "data_nascimento", width: 30 },
+//             { header: "Responsavel", key: "responsavel", width: 30 },
+//             { header: "Telefone", key: "telefone", width: 30 },
+//             { header: "Email", key: "email", width: 30 },
+//         ];
 
-        for (let item of data) {
-            sheet.addRow({
-                id: item.id,
-                numero_cadastro: item.numero_cadastro,
-                aluno: item.aluno,
-                data_nascimento: item.data_nascimento,
-                responsavel: item.responsavel,
-                telefone: item.telefone,
-                email: item.email
-            });
-        }
+//         for (let item of data) {
+//             sheet.addRow({
+//                 id: item.id,
+//                 numero_cadastro: item.numero_cadastro,
+//                 aluno: item.aluno,
+//                 data_nascimento: item.data_nascimento,
+//                 responsavel: item.responsavel,
+//                 telefone: item.telefone,
+//                 email: item.email
+//             });
+//         }
 
-        return workbook;
+//         return workbook;
 
-    } catch (err) {
-        console.log("Error= ", err);
-    }
-}
+//     } catch (err) {
+//         console.log("Error= ", err);
+//     }
+// }
 
 async function updateRegistration(data, id) {
     return await database.updateById(tableName, data, id, idName);
@@ -72,7 +71,7 @@ module.exports = {
     getRegistrationById,
     getRegistrationAddress,
     createRegistration,
-    exportToExcel,
+    // exportToExcel,
     updateRegistration,
     deleteRegistration
 }

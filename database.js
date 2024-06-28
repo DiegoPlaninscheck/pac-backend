@@ -24,12 +24,9 @@ async function getById(table, id, idName) {
 }
 
 async function getRegistrationAddress(firstTable, secondTable) {
-    console.log("First Table= ", firstTable);
-    console.log("Second Table= ", secondTable);
-    // const [rows] = await pool.query(`SELECT * FROM ${firstTable} JOIN ${secondTable} ON ${firstTable}.idEndereco = ${secondTable}.idEndereco`);
-    // return rows;
-    return "";
-
+    const [rows] = await pool.query(`SELECT * FROM ${firstTable} JOIN ${secondTable} ON ${firstTable}.idEndereco = ${secondTable}.idEndereco`);
+    console.log(rows);
+    return rows;
 }
 
 async function create(table, data, idName) {

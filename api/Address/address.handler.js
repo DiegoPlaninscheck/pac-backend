@@ -16,7 +16,6 @@ async function createAddress(data) {
 }
 
 async function updateAddress(data, id) {
-    console.log("Data= " , data);
     return await database.updateById(tableName, data, id, idName);
 }
 
